@@ -1,0 +1,63 @@
+/* Types of element */
+body {
+    background-color: #9bc1bc;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+div {
+    width: 45%;
+    margin: 0px 0px 30px 30px;
+}
+
+footer {
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    text-align: center;
+    margin: 30px;
+    padding: 1px;
+    clear: both;
+    background-color: bisque;
+}
+
+h1 {
+    text-align: center;
+    font-family: 'Brush Script MT', cursive;
+    font-weight: 300;
+    background-color: bisque;
+    font-size: 50px;
+}
+
+/* Classes */
+.main {
+    border: 2px solid;
+    border-radius: 10px;
+    background-color: bisque;
+    padding: 4px;
+}
+
+/* Elements by id */
+#bookimg {
+    float: left;
+    clear: left;
+    margin: 10px;
+}
+
+#div1 {
+    float: left;
+    clear: left;
+}
+
+#div4 {
+    float: right;
+    clear: right;
+    text-align: center;
+    max-width: 50%;
+}
+
+#titlesearch {
+    background-color: #ed6a5a;
+    text-align: center;
+    padding: 3px;
+    margin: auto;
+    margin-bottom: 10px;
+    width: 30%;
+}
