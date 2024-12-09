@@ -10,30 +10,30 @@ Mobile Browsers: iOS Safari (12+), Android Chrome (8.0+).
 Developer Manual
 Installation
 Clone the repository:
-bash
-Copy code
+Terminal
+type code
 git clone https://github.com/raanvine/INST377-Final.git
 Navigate to the project directory:
-bash
-Copy code
+Terminal
+Type code
 cd INST377-Final
 Install dependencies using Node.js and npm:
-bash
-Copy code
+Terminal
+Type code
 npm install
 Running the Application
 To run the development server locally:
 
-bash
-Copy code
+Terminal
+Type code
 npm start
 The application will be accessible at http://localhost:3000.
 
 Running Tests
 Run tests using:
 
-bash
-Copy code
+Terminal
+Type code
 npm test
 This ensures all functionality is validated.
 
