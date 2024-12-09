@@ -1,50 +1,61 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <title>ShelfMatch: Tailored Book Recommendations Without the Spoilers</title>
         <link rel="stylesheet" href="Group 37 Final CSS.css">
     </head>
 
     <body>
         <!-- Page header -->
         <header>
-            <h1 id="myHeader">Oh Book, Where Art Thou?</h1>
+            <h1> # ShelfMatch</h1>
+            <p>Oh Book, Where Are You? Tailored Book Recommendations Without The Spoilers</p>
+            <nav>
+                <ul>
+                    <li><a href="Group 37 Final Home.html">Home</a></li>
+                    <li><a href="Group 37 Final Help.html">Help</a></li>
+                    <li><a href="Group 37 Final About.html">About</a></li>
+                </ul>
+            </nav>
         </header>
-        
-        <!-- Top search bar -->
-        <div id="titlesearch">
-            <em>Search by title:</em>
-            <!-- Search form -->
-            <form name="bookSearch" onsubmit="loadSite(); return false">
-                <input type="text" placeholder="Title" id="searchTitle" required>
-                <br>
-                <input type="submit" value="Search">
-            </form>
-        </div>
-        
-        <!-- Main search area (left div) -->
-        <div id="div1" class="main">
-            <h2>Search using filters</h2>
-            <img id="bookimg" src="https://thumbs.dreamstime.com/b/stack-books-open-book-positioned-top-set-against-teal-background-stack-consists-various-colored-book-333443799.jpg" width="300px"></img>
-            
-            <!-- Search tools will go here -->
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-        </div>
 
-        <!-- Results tab (right div) -->
-        <aside id="div4" class="main">
-            <h3 id="waitText">Book results display here</h3>
-
-            <!-- This table fills via API call -->
-            <table id="bookTable">
-            </table>
-        </aside>
-    
-        <!-- Footer will link to information page -->
+        <main>
+            <section class="main">
+                <img id="bookimg" src="https://thumbs.dreamstime.com/b/stack-books-open-book-positioned-top-set-against-teal-background-stack-consists-various-colored-book-333443799.jpg" width="300px" alt="Stack of Books">
+                <h2>Find Your Next Favorite Book</h2>
+                <form id="bookForm">
+                    <label for="searchTitle">Title:</label>
+                    <input type="text" id="searchTitle" name="searchTitle" placeholder="Enter book title">
+                    
+                    <label for="searchAuthor">Author:</label>
+                    <input type="text" id="searchAuthor" name="searchAuthor" placeholder="Enter author's name">
+                    
+                    <label for="searchGenre">Genre:</label>
+                    <input type="text" id="searchGenre" name="searchGenre" placeholder="Enter genre">
+                    
+                    <label for="excludeKeywords">Exclude Keywords:</label>
+                    <input type="text" id="excludeKeywords" name="excludeKeywords" placeholder="e.g., violence, horror">
+                    
+                    <button type="submit">Search</button>
+                </form>
+            </section>
+            <section id="searchResults">
+                <h3>Results</h3>
+                <div id="bookResults"></div>
+            </section>
+        </main>
         <footer>
-            <p>About + Help</p>
+            <p>© 2024 ShelfMatch. All rights reserved.</p>
         </footer>
+        <script src="Group 37 Final JS.js"></script>
     </body>
-
-    <script src="Group 37 Final JS.js" defer>       
-    </script>
 </html>
+
+
+
+
+
+
+
+            
+          

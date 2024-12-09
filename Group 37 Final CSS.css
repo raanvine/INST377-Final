@@ -2,6 +2,8 @@
 body {
     background-color: #9bc1bc;
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    margin: 0;
+    padding: 0;
 }
 
 div {
@@ -26,12 +28,43 @@ h1 {
     font-size: 50px;
 }
 
+/* Navigation Bar */
+.navbar {
+    display: flex;
+    justify-content: center;
+    background-color: #ed6a5a;
+    padding: 10px 0;
+    list-style: none;
+    margin: 0;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.navbar li {
+    margin: 0 20px;
+}
+
+.navbar a {
+    color: white;
+    text-decoration: none;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.navbar a:hover {
+    color: #ffd166;
+}
+
+
 /* Classes */
 .main {
     border: 2px solid;
     border-radius: 10px;
     background-color: bisque;
     padding: 4px;
+    margin: 20px auto;
+    max-width: 80%;
 }
 
 /* Elements by id */
@@ -60,4 +93,59 @@ h1 {
     margin: auto;
     margin-bottom: 10px;
     width: 30%;
+}
+
+/* Additional styles for flexibility */
+.results-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+}
+
+.result-card {
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 10px;
+    background-color: white;
+    max-width: 300px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    text-align: left;
+}
+
+.result-card h3 {
+    font-size: 18px;
+    margin: 5px 0;
+}
+
+.result-card p {
+    font-size: 14px;
+    color: #555;
+}
+
+button {
+    background-color: #ed6a5a;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+button:hover {
+    background-color: #ffd166;
+    transition: background-color 0.3s ease; /* Smooth color transition */
+
+}
+
+footer {
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    text-align: center;
+    margin: 30px;
+    padding: 10px; /* Increase padding for better spacing */
+    background-color: bisque; /* Matches header color for consistency */
+    border-top: 2px solid #ed6a5a; /* Add a border for separation */
+    font-size: 14px; /* Ensure readability */
+    color: #333; /* Darker text for contrast */
 }

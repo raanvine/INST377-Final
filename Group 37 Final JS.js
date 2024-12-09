@@ -1,3 +1,64 @@
+// Event listener for form submission to handle book search
+document.getElementById('bookForm').addEventListener('submit', function(event) {
+    event.preventDefault(); // Prevent page refresh
+
+    const title = document.getElementById('searchTitle').value;
+    const author = document.getElementById('searchAuthor').value;
+    const genre = document.getElementById('searchGenre').value;
+    const excludeKeywords = document.getElementById('excludeKeywords').value.toLowerCase().split(',').map(k => k.trim());
+
+    // Ensure at least one search criteria is filled out
+    if (!title && !author && !genre) {
+        alert('Please enter at least one search criteria!');
+        return;
+    }
+
+    // Prepare query parameters based on user input
+    const query = [];
+    if (title) query.push(`title=${title}`);
+    if (author) query.push(`author=${author}`);
+    if (genre) query.push(`subject=${genre}`);
+
+    // Fetch data from Open Library API
+    fetch(`https://openlibrary.org/search.json?${query.join('&')}`)
+        .then(response => response.json())
+        .then(data => {
+            const resultsDiv = document.getElementById('bookResults');
+            resultsDiv.innerHTML = ''; // Clear previous results
+
+            // Filter books based on excludeKeywords
+            const books = data.docs.filter(book => {
+                if (excludeKeywords.length > 0) {
+                    const fieldsToCheck = [
+                        book.title,
+                        book.author_name?.join(', '),
+                        book.subject?.join(', ')
+                    ].join(' ').toLowerCase();
+
+                    return !excludeKeywords.some(keyword => fieldsToCheck.includes(keyword));
+                }
+                return true;
+            });
+
+            // Display the top 15 results
+            books.slice(0, 15).forEach(book => {
+                const bookDiv = document.createElement('div');
+                bookDiv.innerHTML = `
+                    <h3>${book.title}</h3>
+                    <p><strong>Author:</strong> ${book.author_name?.join(', ') || 'Unknown'}</p>
+                    <p><strong>Publish Year:</strong> ${book.first_publish_year || 'Unknown'}</p>
+                    <p><strong>Formats:</strong> ${book.ebook_count_i > 0 ? 'eBook Available' : 'No eBook'}</p>
+                `;
+                resultsDiv.appendChild(bookDiv);
+            });
+        })
+        .catch(err => {
+            console.error(err);
+            alert('Error fetching book data. Please try again later.');
+        });
+});
+
+//Loadin book based on title
 function loadBookAPI() {
     // Generate URL
     myString = "https://openlibrary.org/search.json?title="
@@ -10,9 +71,11 @@ function loadBookAPI() {
         .then((res) => res.json())
 }
 
+// Funnction to load the site and populate the book table
 async function loadSite() {
     // Changing front end text while loading API
     document.getElementById('waitText').innerHTML = "Please wait..."
+
     const myLoad = await loadBookAPI()
 
     // Retrieving docs from API 
@@ -41,7 +104,7 @@ async function loadSite() {
     bookTable.appendChild(tableHead)
 
     // (Re)filling table on front end
-    num = 0
+    let num = 0
     storeBooks.forEach((book) => {
         if (num < 15) {
             const tableRow = document.createElement("tr")

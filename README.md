@@ -1,4 +1,5 @@
 # ShelfMatch: Tailored Book Recommendations Without the Spoilers
+    Group 37 members: Kamal Patel, Clare Dombrosky, Vineet Ravichandran, Yann Mbianga
 
 ## Project Description
 ShelfMatch is a web application designed to help users find books while ensuring the exclusion of sensitive content. By integrating the Open Library Search API, users can search for books based on their preferences (title, author, and genre) while excluding specific topics they want to avoid. The application filters results based on user-specified criteria, providing a personalized and spoiler-free browsing experience. Users can also view book details and check available formats (eBook, audiobook, or print).
