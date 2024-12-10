@@ -13,6 +13,9 @@ document.getElementById('bookForm').addEventListener('submit', function(event) {
         return;
     }
 
+    // Change header on front end while results load
+    document.getElementById('resultsHeader').innerHTML = "Please wait..."
+
     // Prepare query parameters based on user input
     const query = [];
     if (title) query.push(`title=${title}`);
@@ -35,7 +38,7 @@ document.getElementById('bookForm').addEventListener('submit', function(event) {
                         book.subject?.join(', ')
                     ].join(' ').toLowerCase();
 
-                    return !excludeKeywords.some(keyword => fieldsToCheck.includes(keyword));
+                    return excludeKeywords.some(keyword => fieldsToCheck.includes(keyword));
                 }
                 return true;
             });
@@ -51,13 +54,16 @@ document.getElementById('bookForm').addEventListener('submit', function(event) {
                 `;
                 resultsDiv.appendChild(bookDiv);
             });
+            document.getElementById('resultsHeader').innerHTML = "Results"
         })
         .catch(err => {
             console.error(err);
             alert('Error fetching book data. Please try again later.');
+            document.getElementById('resultsHeader').innerHTML = "Results"
         });
 });
 
+/* Scrapped from earlier draft: 
 //Loadin book based on title
 function loadBookAPI() {
     // Generate URL
@@ -128,4 +134,4 @@ async function loadSite() {
         }
             document.getElementById('waitText').innerHTML = "Top Results"
     })
-}
+} */
