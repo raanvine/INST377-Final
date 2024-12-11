@@ -2,9 +2,8 @@
   "name": "inst377-final",
   "version": "1.0.0",
   "description": "web application",
-  "main": "Group 37 Final JS.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+  "dependencies": {
+    "@glidejs/glide": "^3.7.1"
   },
   "author": "",
   "license": "ISC"
