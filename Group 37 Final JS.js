@@ -43,20 +43,40 @@ document.getElementById('bookForm').addEventListener('submit', function(event) {
                 return true;
             });
 
-            // Display the top 15 results
             books.slice(0, 15).forEach(book => {
-                const bookDiv = document.createElement('div');
-                bookDiv.innerHTML = `
+                const bookSlide = document.createElement('li');
+                bookSlide.classList.add('result-card'); // Add class for styling
+                
+                // Add cover image
+                const coverImageUrl = book.cover_i 
+                    ? `https://covers.openlibrary.org/b/id/${book.cover_i}-L.jpg` 
+                    : 'https://via.placeholder.com/150'; 
+                
+                bookSlide.innerHTML = `
+                    <img src="${coverImageUrl}" alt="Cover of ${book.title}" class="book-cover">
                     <h3>${book.title}</h3>
                     <p><strong>Author:</strong> ${book.author_name?.join(', ') || 'Unknown'}</p>
                     <p><strong>Publish Year:</strong> ${book.first_publish_year || 'Unknown'}</p>
                     <p><strong>Formats:</strong> ${book.ebook_count_i > 0 ? 'eBook Available' : 'No eBook'}</p>
                 `;
-                resultsDiv.appendChild(bookDiv);
+                
+                resultsDiv.appendChild(bookSlide);
             });
-            document.getElementById('resultsHeader').innerHTML = "Results"
-        })
-        .catch(err => {
+
+            // Initialize Glide.js after loading results
+    new Glide('#carousel', {
+        type: 'carousel',
+        perView: 3, // Number of slides visible
+        gap: 20,    // Space between slides
+        breakpoints: {
+            1200: { perView: 3 },
+            900: { perView: 2 },
+            600: { perView: 1 }
+        }
+    }).mount();
+            document.getElementById('resultsHeader').innerHTML = "Results";
+    })
+    .catch(err => {
             console.error(err);
             alert('Error fetching book data. Please try again later.');
             document.getElementById('resultsHeader').innerHTML = "Results"
