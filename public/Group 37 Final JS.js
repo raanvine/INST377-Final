@@ -1,3 +1,5 @@
+// Initialize Supabase Client (without redeclaring URL and Key)
+
 // Event listener for form submission to handle book search
 document.getElementById('bookForm').addEventListener('submit', function(event) {
     event.preventDefault(); // Prevent page refresh
@@ -14,7 +16,7 @@ document.getElementById('bookForm').addEventListener('submit', function(event) {
     }
 
     // Change header on front end while results load
-    document.getElementById('resultsHeader').innerHTML = "Please wait..."
+    document.getElementById('resultsHeader').innerHTML = "Please wait...";
 
     // Prepare query parameters based on user input
     const query = [];
@@ -46,42 +48,106 @@ document.getElementById('bookForm').addEventListener('submit', function(event) {
             books.slice(0, 15).forEach(book => {
                 const bookSlide = document.createElement('li');
                 bookSlide.classList.add('result-card'); // Add class for styling
-                
+
                 // Add cover image
                 const coverImageUrl = book.cover_i 
                     ? `https://covers.openlibrary.org/b/id/${book.cover_i}-L.jpg` 
                     : 'https://via.placeholder.com/150'; 
                 
-                bookSlide.innerHTML = `
+                bookSlide.innerHTML = ` 
                     <img src="${coverImageUrl}" alt="Cover of ${book.title}" class="book-cover">
                     <h3>${book.title}</h3>
                     <p><strong>Author:</strong> ${book.author_name?.join(', ') || 'Unknown'}</p>
                     <p><strong>Publish Year:</strong> ${book.first_publish_year || 'Unknown'}</p>
                     <p><strong>Formats:</strong> ${book.ebook_count_i > 0 ? 'eBook Available' : 'No eBook'}</p>
-                `;
-                
+                    <button class="save-book" data-title="${book.title}" data-author="${book.author_name?.join(', ') || ''}" data-summary=${book.title}>Save Book</button>`
+                ;
+
                 resultsDiv.appendChild(bookSlide);
             });
 
             // Initialize Glide.js after loading results
-    new Glide('#carousel', {
-        type: 'carousel',
-        perView: 3, // Number of slides visible
-        gap: 20,    // Space between slides
-        breakpoints: {
-            1200: { perView: 3 },
-            900: { perView: 2 },
-            600: { perView: 1 }
-        }
-    }).mount();
+            new Glide('#carousel', {
+                type: 'carousel',
+                perView: 3, // Number of slides visible
+                gap: 20,    // Space between slides
+                breakpoints: {
+                    1200: { perView: 3 },
+                    900: { perView: 2 },
+                    600: { perView: 1 }
+                }
+            }).mount();
             document.getElementById('resultsHeader').innerHTML = "Results";
-    })
-    .catch(err => {
+
+            // Add event listeners to "Save Book" buttons
+            document.querySelectorAll('.save-book').forEach(button => {
+                button.addEventListener('click', function() {
+                    const bookData = {
+                        title: button.getAttribute('data-title'),
+                        author: button.getAttribute('data-author'),
+                        summary: button.getAttribute('data-summary')
+                    };
+                    saveBookToSupabase(bookData);
+                });
+            });
+        })
+        .catch(err => {
             console.error(err);
             alert('Error fetching book data. Please try again later.');
-            document.getElementById('resultsHeader').innerHTML = "Results"
+            document.getElementById('resultsHeader').innerHTML = "Results";
         });
 });
+
+// Function to save a book to the Supabase database
+function saveBookToSupabase(book) {
+    fetch('/api/books', {
+            method: 'POST',
+            body: JSON.stringify({
+                title: book.title,
+                author: book.author,
+                summary: book.title
+            }),
+            headers: {
+                'Content-Type': 'application/json',
+            }
+        }) 
+        .then(({ data, error }) => {
+            if (error) {
+                console.error('Error saving book:', error);
+                alert('Failed to save the book. Please try again.');
+            } else {
+                alert('Book saved successfully!');
+            }
+        });
+}
+
+// Function to load saved books from the Supabase database
+function loadSavedBooks() {
+        fetch('/api/books')
+        .then(({ data, error }) => {
+            if (error) {
+                console.error('Error loading saved books:', error);
+                return;
+            }
+
+            const savedBooksDiv = document.getElementById('savedBooks');
+            savedBooksDiv.innerHTML = ''; // Clear previous results
+
+            data.forEach(book => {
+                const bookDiv = document.createElement('div');
+                bookDiv.classList.add('saved-book');
+                bookDiv.innerHTML = `
+                    <h3>${book.title}</h3>
+                    <p><strong>Author:</strong> ${book.author}</p>
+                    <p><strong>Summary:</strong> ${book.summary}</p>
+                `;
+                savedBooksDiv.appendChild(bookDiv);
+            });
+        });
+}
+
+// Call loadSavedBooks() on page load to display saved books
+document.addEventListener('DOMContentLoaded', loadSavedBooks);
 
 /* Scrapped from earlier draft: 
 //Loadin book based on title

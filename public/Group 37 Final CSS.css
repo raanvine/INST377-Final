@@ -118,6 +118,39 @@ form button:hover {
     transition: background-color 0.3s ease;
 }
 
+/* Advanced Filters */
+.advanced-filters {
+    margin: 20px auto;
+    max-width: 80%;
+    padding: 20px;
+    background-color: white;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+.advanced-filters label {
+    font-weight: bold;
+    margin-right: 10px;
+}
+
+.advanced-filters input[type="checkbox"] {
+    margin-right: 5px;
+}
+
+.advanced-filters button {
+    margin-top: 10px;
+    background-color: #ed6a5a;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.advanced-filters button:hover {
+    background-color: #ffd166;
+}
+
 /* Results Section */
 #searchResults {
     margin: 20px auto;
@@ -169,7 +202,6 @@ form button:hover {
     color: #555;
     margin: 5px 0;
 }
-
 
 /* Carousel Styles */
 .glide {
@@ -253,3 +285,4 @@ form button:hover {
         height: 150px;
     }
 }
+
