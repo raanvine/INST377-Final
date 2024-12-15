@@ -28,6 +28,10 @@ app.get('/contact', (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'Group 37 Final Home.html'));
 });
 
+app.get('/saved-books', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'Group_37_Final_saved_books.html'));
+});
+
 // API route to fetch books from Supabase
 app.get('/api/books', async (req, res) => {
   const { data, error } = await supabase
