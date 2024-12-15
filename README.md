@@ -112,7 +112,8 @@ ShelfMatch has been deployed to Vercel. Access the live application using the li
 3. Configure the following environment variables:  
    - `SUPABASE_URL`: Your Supabase project URL.  
    - `SUPABASE_KEY`: Your Supabase API key.  
-4. Deploy the project with a single click.  
-5. Copy the live deployment URL and add it above.
+4. Deploy the project with a single click.
+5. Live Deployment Link:https://inst-377-final-seven.vercel.app/
+
 
 ---
