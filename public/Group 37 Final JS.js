@@ -124,6 +124,7 @@ function saveBookToSupabase(book) {
 // Function to load saved books from the Supabase database
 function loadSavedBooks() {
         fetch('/api/books')
+        // alert("Runs")
         .then(({ data, error }) => {
             if (error) {
                 console.error('Error loading saved books:', error);
