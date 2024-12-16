@@ -124,7 +124,10 @@ function saveBookToSupabase(book) {
 // Function to load saved books from the Supabase database
 function loadSavedBooks() {
         fetch('/api/books')
-        // alert("Runs")
+        .then((res) => {
+                console.log(res)
+                res.json()
+            })
         .then(({ data, error }) => {
             if (error) {
                 console.error('Error loading saved books:', error);
@@ -132,7 +135,7 @@ function loadSavedBooks() {
             }
 
             const savedBooksDiv = document.getElementById('savedBooks');
-            savedBooksDiv.innerHTML = ''; // Clear previous results
+            savedBooksDiv.innerHTML = 'Err'; // Clear previous results
 
             data.forEach(book => {
                 const bookDiv = document.createElement('div');
@@ -148,7 +151,7 @@ function loadSavedBooks() {
 }
 
 // Call loadSavedBooks() on page load to display saved books
-document.addEventListener('DOMContentLoaded', loadSavedBooks);
+// document.addEventListener('DOMContentLoaded', loadSavedBooks);
 
 /* Scrapped from earlier draft: 
 //Loadin book based on title
